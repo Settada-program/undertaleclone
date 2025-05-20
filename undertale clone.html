@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNDERTALE Clone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background-color: black;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .hero {
+      padding-top: 60px;
+    }
+
+    .logo-img {
+      max-width: 100%;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .mailing-list {
+      font-size: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .mailing-list span {
+      display: block;
+    }
+
+    .mailing-list .new {
+      color: red;
+    }
+
+    .mailing-list .main {
+      color: white;
+    }
+
+    .mailing-list .highlight {
+      color: yellow;
+    }
+
+    .platforms {
+      margin: 30px 0;
+      font-size: 0.6rem;
+    }
+
+    .store-image {
+      width: 300px;
+      max-width: 100%;
+      margin: 20px 0;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      margin: 40px 0 20px;
+      border-top: 1px solid white;
+      padding-top: 20px;
+    }
+
+    .news-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 0.6rem;
+    }
+
+    .news-card {
+      width: 230px;
+      font-size: 1rem;
+    }
+
+    .news-card a {
+      color: white;
+    }
+
+    .news-card a:hover {
+      color: yellow;
+    }
+
+    .highlight-box-wrapper {
+      background-color: #3fbcff;
+      color: white;
+      padding: 30px 20px;
+      margin-top: 40px;
+    }
+
+    .highlight-box p {
+      font-size: 0.6rem;
+      line-height: 1.8;
+      margin-bottom: 0;
+      font
+    }
+
+    .highlight-box strong {
+      display: block;
+      font-size: 0.7rem;
+      margin-top: 10px;
+    }
+
+    .highlighted {
+  color: yellow;
+}
+
+.subdued {
+  color: #888;
+  font-size: 0.8em;
+}
+
+
+    /* Platform Selector CSS-only */
+    .platform-select {
+  margin-top: 40px;
+}
+.platform-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+}
+.platform-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.platform-option label {
+  background: #111;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+.platform-option label:hover {
+  background: #444;
+}
+.platform-option img {
+  width: 50px;
+  height: auto;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"]:checked + label {
+  background: yellow;
+}
+.arrow {
+  display: none;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid yellow;
+  margin-top: 5px;
+  animation: bounce 1s infinite;
+}
+/* ลูกศรแสดงตาม platform ที่เลือก */
+#p1:checked ~ .platform-buttons .platform-option:nth-child(1) .arrow1,
+#p2:checked ~ .platform-buttons .platform-option:nth-child(2) .arrow2,
+#p3:checked ~ .platform-buttons .platform-option:nth-child(3) .arrow3,
+#p4:checked ~ .platform-buttons .platform-option:nth-child(4) .arrow4,
+#p5:checked ~ .platform-buttons .platform-option:nth-child(5) .arrow5 {
+  display: block;
+}
+/* Animation ลูกศรเด้งเบาๆ */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.platform-display {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  position: relative;
+}
+
+.platform-image {
+  display: none;
+  max-width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.platforms-heading {
+  font-size: 1rem;
+  color: white;
+  letter-spacing: 2px;
+  line-height: 1.6;
+  margin-bottom: -20px;
+}
+
+/* แสดงภาพที่ถูกเลือกพร้อม animation fade-in */
+#p1:checked ~ .platform-display .img1,
+#p2:checked ~ .platform-display .img2,
+#p3:checked ~ .platform-display .img3,
+#p4:checked ~ .platform-display .img4,
+#p5:checked ~ .platform-display .img5 {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 0.5s ease;
+}
+
+
+
+
+
+    @media (max-width: 768px) {
+      .logo-img {
+        width: 220px;
+      }
+
+      .news-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .news-card {
+        width: 90%;
+      }
+    
+    }
+  </style>
+</head>
+<body>
+  <div class="section hero">
+    <img src="capsule_616x353.jpg" alt="UNDERTALE Logo" class="logo-img" />
+    <a href="https://undertale.com/newsletter/" target="_blank" style="text-decoration: none; color: inherit;">
+  <div class="mailing-list">
+    <span class="new">NEW!</span>
+    <span class="main">UNDERTALE /<br>DELTARUNE</span>
+    <span class="highlight">MAILING LIST</span>
+  </div>
+</a>
+
+  <div class="section">
+  <p class="platforms-heading">GAME<br>AVAILABLE ON</p>
+</div>
+
+<div class="section platform-select">
+  <input type="radio" name="platform" id="p1" checked>
+  <input type="radio" name="platform" id="p2">
+  <input type="radio" name="platform" id="p3">
+  <input type="radio" name="platform" id="p4">
+  <input type="radio" name="platform" id="p5">
+
+  <div class="platform-buttons">
+    <div class="platform-option">
+      <label for="p1"><img src="Nintendo_Switch_logo.svg.png" alt="Switch"></label>
+      <span class="arrow arrow1"></span>
+    </div>
+    <div class="platform-option">
+      <label for="p2"><img src="pclogo.jpg" alt="PC"></label>
+      <span class="arrow arrow2"></span>
+    </div>
+    <div class="platform-option">
+      <label for="p3"><img src="playstation-47410.jpg" alt="PS4"></label>
+      <span class="arrow arrow3"></span>
+    </div>
+    <div class="platform-option">
+      <label for="p4"><img src="ps-vita-logo.png" alt="PSVita"></label>
+      <span class="arrow arrow4"></span>
+    </div>
+    <div class="platform-option">
+      <label for="p5"><img src="xbox-black7554.jpg" alt="Xbox"></label>
+      <span class="arrow arrow5"></span>
+    </div>
+  </div>
+
+  <div class="platform-display">
+    <img src="collector nin.png" alt="Switch" class="platform-image img1">
+    <img src="pc collector.png" alt="PC" class="platform-image img2">
+    <img src="ps4 collector.png" alt="PS4" class="platform-image img3">
+    <img src="psvita collector.png" alt="PSVita" class="platform-image img4">
+    <img src="xbox collector.png" alt="Xbox" class="platform-image img5">
+  </div>
+</div>
+
+
+  <div class="section">
+  <h2 class="section-title">News and Updates</h2>
+  <div class="news-grid">
+    <div class="news-card">
+      <a href="https://undertale.com/deltarune-update-092021/">
+        <span class="highlighted">DELTARUNE</span><br>
+        Status Update<br>
+        <span class="subdued">Sept 2021</span>
+      </a>
+    </div>
+
+    <div class="news-card">
+      <a href="https://store.line.me/stickershop/product/16707223/th">
+        <span class="highlighted">UNDERTALE</span><br>
+        LINE Stickers: Volume 3 is here!<br>
+        <span class="subdued">(Available on iMessage too!)</span>
+      </a>
+    </div>
+
+    <div class="news-card">
+      <a href="https://undertale.com/deltarune-update-092020/">
+        <span class="highlighted">DELTARUNE</span><br>
+        Status Update<br>
+        <span class="subdued">Sept 2020</span>
+      </a>
+    </div>
+
+    <div class="news-card">
+      <a href="https://undertale.com/alarmclock/">
+        <span class="highlighted">UNDERTALE</span><br>
+        5th Anniversary<br>
+        Alarm Clock<br>
+        Winter Dialogue
+      </a>
+    </div>
+
+    <div class="news-card">
+      <a href="https://store.line.me/stickershop/product/12885547/th">
+        <span class="highlighted">UNDERTALE</span><br>
+        LINE Stickers: Volume 2 is here!<br>
+        <span class="subdued">(Available on iMessage too!)</span>
+      </a>
+    </div>
+
+    <div class="news-card">
+      <a href="https://store.line.me/stickershop/product/13505512/th">
+        <span class="highlighted">DELTARUNE</span><br>
+        LINE Stickers: Volume 1 is here!<br>
+        <span class="subdued">(Available on iMessage too!)</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="highlight-box-wrapper">
+  <a href="https://deltarune.com/" target="_blank" style="text-decoration: none; color: inherit;">
+    <div class="highlight-box">
+      <p>If you completed UNDERTALE,<br>you may be interested in</p>
+      <img src="download (1).jpg" alt="UNDERTALE Logo" class="logo-img" />
+      <strong><br>CHAPTER 2<br>AVAILABLE NOW &gt;</strong>
+    </div>
+  </a>
+</div>
